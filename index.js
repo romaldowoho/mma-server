@@ -2,7 +2,6 @@ const Koa = require("koa");
 const Router = require("koa-router");
 const cors = require("@koa/cors");
 const axios = require("axios");
-const fetch = require("node-fetch");
 const cheerio = require("cheerio");
 const app = new Koa();
 const router = new Router();
