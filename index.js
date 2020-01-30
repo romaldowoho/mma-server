@@ -79,16 +79,6 @@ router.get("/", async (ctx, next) => {
         response[idxTbl][rank] = [name, rank_change];
       });
   });
-  // });
-  //   tables.each((idx, el) => {
-  //     console.log(el.children);
-  //   let info = el.find($(".info"));
-  //   data[info] = el.find($("a"));
-  //   });
-
-  //   ctx.body = $(".views-view-table")
-  //     .text()
-  //   .replace(/\s\s+/g, "");
   ctx.body = response;
   return next();
 });
