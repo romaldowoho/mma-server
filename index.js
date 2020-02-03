@@ -44,15 +44,21 @@ router.get("/", async (ctx, next) => {
   // here I am creating an object for each weight class (wc), which will contain the wc name and all fighters
   // rank 0 means champ
   weight_classes.find($(".info")).each((idx, el) => {
-    let info = {};
-    info["wclass"] = $(el)
+    let info = {
+      wclass: "",
+      fighters: []
+    };
+    info.wclass = $(el)
       .find($("h4"))
       .text();
-    info[0] = [
+    const regex = /pound-for-pound/gi;
+    info.wclass = info.wclass.replace(regex, "P4P"); // replacing pound-for-pound with P4P, as it's shorter
+
+    info.fighters.push([
       $(el)
         .find($("a"))
         .text()
-    ];
+    ]);
     response.push(info);
   });
 
@@ -75,7 +81,7 @@ router.get("/", async (ctx, next) => {
           .find(".views-field-weight-class-rank-change")
           .text()
           .replace(/\s\s+/g, "");
-        response[idxTbl][rank] = [name, rank_change];
+        response[idxTbl].fighters.push([name, rank_change]);
       });
   });
   ctx.body = response;
